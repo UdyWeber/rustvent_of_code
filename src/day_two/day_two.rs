@@ -55,19 +55,6 @@ impl Results {
 
     }
 
-    // After knowing the secret elf encryption
-    pub fn from_moves(opponent_move: &Moves, response_move: &Moves) -> Self {
-        match (response_move, opponent_move) {
-            (Moves::Paper, Moves::Rock)
-            | (Moves::Rock, Moves::Scissors)
-            | (Moves::Scissors, Moves::Paper) => Results::Win,
-            (Moves::Paper, Moves::Paper)
-            | (Moves::Rock, Moves::Rock)
-            | (Moves::Scissors, Moves::Scissors) => Results::Draw,
-            _ => Results::Lose
-        }
-    }
-
     pub fn value(&self) -> i64 {
         match self {
             Results::Win => 6,
@@ -83,7 +70,7 @@ pub fn day_two_resolution() -> i64 {
     file_read
         .lines()
         .map(|line| line.split_once(" ").unwrap())
-        .fold( 0,  |(mut sum), (opponent_move, round_result)| {
+        .fold( 0,  |mut sum, (opponent_move, round_result)| {
             let opponent_move = Moves::from_strategy_char(opponent_move)
                 .unwrap();
 
