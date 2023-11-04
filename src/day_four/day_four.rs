@@ -26,23 +26,6 @@ impl Section {
             || is_contained_range.contains(&self.start)
             || is_contained_range.contains(&self.end)
     }
-
-    pub fn merge(&self, s: Section) -> Self {
-        let smaller_start = match self.start > s.start {
-            true => { s.start }
-            false => { self.start }
-        };
-
-        let greater_end = match self.end < s.end {
-            true => { s.end }
-            false => { self.end }
-        };
-
-        Section {
-            start: smaller_start,
-            end: greater_end,
-        }
-    }
 }
 
 pub fn day_four_resolution() {
